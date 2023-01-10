@@ -1,0 +1,142 @@
+#include <iostream>
+#include <vector>
+#include <map>
+using namespace std;
+
+bool czynalezy(vector<int>tab, int element)
+{
+	for (int i = 0; i < tab.size(); i++)
+	{
+		if (tab[i] == element)
+		{
+			return true;
+		}
+	}
+	return false;
+}
+bool czyzawiera(vector<int>tab1, vector<int>tab2)
+{
+	for (int i = 0; i < tab2.size(); i++)
+	{
+		if (!czynalezy(tab1, tab2[i]))
+		{
+			return false;
+		}
+	}
+	return true;
+}
+void wypisz(vector<int>tab)
+{
+	for (int i = 0; i < tab.size(); i++)
+	{
+		cout << tab[i] << ",";
+	}
+	cout << endl;
+}
+int max(vector<int>tab)
+{
+	int wynik = tab[0];
+	for (int i = 0; i < tab.size(); i++)
+	{
+		if (tab[i] > wynik)
+		{
+			wynik = tab[i];
+		}
+	}
+	return wynik;
+}
+vector<int>unikalnosc(vector<int>tab)
+{
+	vector<int>wynik;
+	for (int i = 0; i < tab.size(); i++)
+	{
+		if (!czynalezy(wynik, tab[i]))
+		{
+			wynik.push_back(tab[i]);
+		}
+	}
+	return wynik;
+}
+int suma(vector<int>tab)
+{
+	int sumka = 0;
+	for (int i = 0; i < tab.size(); i++)
+	{
+		sumka += tab[i];
+	}
+	return sumka;
+}
+double avg(vector<int>tab)
+{
+	double srednik = suma(tab);
+	double srednia = 0;
+	srednia = srednik / tab.size();
+	return srednia;
+}
+vector<int>podzielne(vector<int>tab, int dzielnik)
+{
+	vector<int>wynik;
+	for (int i = 0; i < tab.size(); i++)
+	{
+		if (tab[i] % dzielnik == 0)
+		{
+			wynik.push_back(tab[i]);
+		}
+	}
+	return wynik;
+}
+vector<int>konwersja(int liczba)
+{
+	int numer = 123;
+	vector<int>wynik;
+	while (numer > 0)
+	{
+		wynik.push_back(numer % 10);
+		numer /= 10;
+	}
+	return wynik;
+}
+vector<int>sumka(vector<int>l1, vector<int>l2)
+{
+	vector<int>wynik;
+	int zmienna = 0;
+	for (int i = 0; i < l1.size(); i++)
+	{
+		wynik.push_back(((l1[i] + l2[i]) % 10) + zmienna);
+		zmienna = (l1[i] + l2[i]) / 10;
+	}
+	return wynik;
+}
+int main()
+{
+	vector<int>l1 = konwersja(234);
+	vector<int>l2 = konwersja(328);
+	vector<int>l3 = sumka(l1,l2);
+	wypisz(konwersja(123));
+	wypisz(l3);
+	vector<int>tab = { 1,2,3,4,5,6,7,8,1,2,3,4,5,6,7,8 };
+	vector<int>tab1 = { 1,2,3,4,5,6,7,8 };
+	vector<int>tab2 = { 1,2,3 };
+	int element = 4;
+	wypisz(tab);
+	wypisz(unikalnosc(tab));
+	wypisz(podzielne(tab, 2));
+	int wynik = max(tab);
+	int wynik1 = czynalezy(tab, element);
+	int wynik2 = czyzawiera(tab1, tab2);
+	int wynik3 = suma(tab);
+	double wynik4 = avg(tab);
+	cout << wynik << endl;
+	cout << wynik1 << endl;
+	cout << wynik2 << endl;
+	cout << wynik3 << endl;
+	cout << wynik4 << endl;
+	map<int, int>m;
+	m.insert({ 8,3 });
+	m.insert({ 7,2 });
+	m.insert({ 5,1 });
+	for (auto& el : m)
+	{
+		cout << el.first << "->" << el.second << endl;
+	}
+}
